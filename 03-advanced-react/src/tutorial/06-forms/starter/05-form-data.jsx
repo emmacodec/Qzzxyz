@@ -1,10 +1,25 @@
 import { useState } from 'react';
 
+// a set of interface that allows you to set a pair of key values
+// presenting form fields and their values
+
 const UncontrolledInputs = () => {
   const [value, setValue] = useState(0);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // <= DOM element that triggers the event
+    console.log(e.currentTarget); // <= DOM element that event listener is listening on
+
+    const formData = new formData(e.currentTarget); // formData logic that contains array of arrays
+    //console.log(formData);
+    //const email = formData.get('email');
+    //console.log([...formData.entries()]);
+
+
+    // if you want to connect with the server
+    const newUser = Object.fromEntries(formData);
+    console.log(newUser);
+    setValue(value +1);
   };
   return (
     <div>
@@ -24,7 +39,7 @@ const UncontrolledInputs = () => {
           </label>
           <input type='email' className='form-input' id='email' name='email' />
         </div>
-        {/* email */}
+        {/* password */}
         <div className='form-row'>
           <label htmlFor='password' className='form-label'>
             Password
